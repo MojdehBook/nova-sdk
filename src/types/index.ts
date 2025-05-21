@@ -1,0 +1,47 @@
+// API Response Types
+export interface ApiResponse<T> {
+  success: boolean;
+  message?: string;
+  data?: T;
+  error?: ApiError;
+}
+
+export interface ApiError {
+  id?: string;
+  code?: string;
+  resource?: string;
+  fields?: Record<string, string>;
+  meta?: Record<string, any>;
+}
+
+// File Types
+export interface ProcessedFile {
+  variant: string;
+  file_name: string;
+  file_size: number;
+  url: string | null;
+}
+
+export interface FileResponseDTO {
+  id: number;
+  app_id: number;
+  dir_id: number;
+  file_name: string;
+  original_name: string;
+  mime_type: string | null;
+  tags: string[] | null;
+  file_size: number;
+  url: string | null;
+  processed_files: ProcessedFile[] | null;
+  uploaded_at: Date;
+}
+
+// Directory Types
+export interface DirectoryResponseDTO {
+  id: number;
+  name: string;
+  is_public: boolean;
+  owner_id: number;
+  files?: FileResponseDTO[];
+  files_count?: number;
+}

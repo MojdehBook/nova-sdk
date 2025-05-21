@@ -1,0 +1,36 @@
+{
+	"name": "nova_sdk",
+	"version": "0.0.1",
+	"description": "",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"start": "npx tsc --build . && node dist/index.js",
+		"build": "rm -rf dist/ && npx tsc --build .",
+		"lint": "eslint --cache --fix",
+		"prepare": "husky"
+	},
+	"lint-staged": {
+		"*.ts": "eslint --cache --fix",
+		"*.{ts,js,md}": "prettier --write"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.16.0",
+		"@types/node": "^20.4.2",
+		"eslint": "^9.8.0",
+		"eslint-config-prettier": "^9.1.0",
+		"husky": "^9.1.7",
+		"nodemon": "^3.1.4",
+		"prettier": "3.0.3",
+		"typescript": "^5.4.5",
+		"typescript-eslint": "^8.17.0"
+	},
+	"dependencies": {
+		"dotenv": "^16.4.5",
+		"ts-node": "^10.9.2",
+		"winston": "^3.17.0",
+		"axios": "^1.6.8",
+    "form-data": "^4.0.0"
+	},
+	"files": ["dist/**/*"]
+}
