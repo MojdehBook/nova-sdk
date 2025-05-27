@@ -4,8 +4,42 @@ A comprehensive guide on how to use the Nova SDK in your TypeScript/JavaScript p
 
 ## Installation
 
+### Using npm
+
 ```bash
 npm install git@github.com:MojdehBook/nova-sdk.git
+```
+
+### Using git submodule
+
+```bash
+git submodule add git@github.com:MojdehBook/nova-sdk.git
+```
+
+## Updating the SDK
+
+### For npm installations
+
+To get the latest changes when using npm:
+
+```bash
+# Update to the latest version
+npm update nova_sdk
+
+# Force a fresh install with latest changes
+npm install git@github.com:MojdehBook/nova-sdk.git --force
+```
+
+### For git submodule installations
+
+To get the latest changes when using git submodule:
+
+```bash
+# Update to the latest version
+git submodule update --remote --merge
+
+# Force update to the latest version
+git submodule update --remote --force
 ```
 
 ## Configuration
@@ -15,7 +49,7 @@ The SDK requires a base URL and a token for the API. You can provide it in two w
 1. During instantiation:
 
 ```typescript
-import NovaSDK from '@mojdeh/nova-sdk';
+import NovaSDK from 'nova_sdk';
 
 const nova = new NovaSDK('https://your-api-url', 'token');
 ```
@@ -88,7 +122,7 @@ interface DirectoryResponseDTO {
 ### Uploading a Single File
 
 ```typescript
-import NovaSDK from '@mojdeh/nova-sdk';
+import NovaSDK from 'nova_sdk';
 import { Buffer } from 'node:buffer';
 
 const nova = new NovaSDK('https://your-api-url', 'token');

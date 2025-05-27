@@ -8,10 +8,10 @@ First, install the required dependencies:
 
 ```bash
 # For JavaScript
-npm install express multer
+npm install express multer nova_sdk
 
 # For TypeScript (additional dependencies)
-npm install express multer typescript @types/express @types/multer
+npm install express multer typescript @types/express @types/multer nova_sdk
 ```
 
 ## Basic Setup
@@ -21,7 +21,7 @@ npm install express multer typescript @types/express @types/multer
 ```javascript
 const express = require('express');
 const multer = require('multer');
-const NovaSDK = require('@mojdeh/nova-sdk');
+const NovaSDK = require('nova_sdk');
 
 const app = express();
 const nova = new NovaSDK();
@@ -41,7 +41,7 @@ const upload = multer({
 ```typescript
 import express from 'express';
 import multer from 'multer';
-import NovaSDK from '@mojdeh/nova-sdk';
+import NovaSDK from 'nova_sdk';
 
 const app = express();
 const nova = new NovaSDK();
@@ -63,7 +63,7 @@ const upload = multer({
 ```javascript
 const express = require('express');
 const multer = require('multer');
-const NovaSDK = require('@mojdeh/nova-sdk');
+const NovaSDK = require('nova_sdk');
 
 const app = express();
 const upload = multer();
@@ -119,7 +119,7 @@ app.post('/upload-multiple', upload.array('files'), async (req, res) => {
 ```typescript
 import express, { Request, Response } from 'express';
 import multer from 'multer';
-import NovaSDK from '@mojdeh/nova-sdk';
+import NovaSDK from 'nova_sdk';
 
 const app = express();
 const upload = multer();
