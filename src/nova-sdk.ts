@@ -16,7 +16,7 @@ export interface UploadFile {
 }
 
 export interface UploadOptions {
-	namespace?: string;
+	namespace: string;
 	directory_name?: string;
 	preserve_name?: boolean;
 	tags?: string[];
@@ -121,8 +121,16 @@ export default class NovaSDK {
 	// File Upload Methods
 	async uploadFiles(
 		files: UploadFile[],
-		options: UploadOptions = {}
+		options: UploadOptions
 	): Promise<FileResponseDTO[]> {
+		if (!files || !Array.isArray(files) || files.length === 0) {
+			throw new Error('Files array is required');
+		}
+
+		if (!options || !options.namespace) {
+			throw new Error('Namespace is required in upload options');
+		}
+
 		const form = new FormData();
 
 		// Add options to form data

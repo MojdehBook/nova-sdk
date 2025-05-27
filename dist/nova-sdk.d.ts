@@ -7,7 +7,7 @@ export interface UploadFile {
     mimetype: string;
 }
 export interface UploadOptions {
-    namespace?: string;
+    namespace: string;
     directory_name?: string;
     preserve_name?: boolean;
     tags?: string[];
@@ -20,5 +20,5 @@ export default class NovaSDK {
     createDirectory(dirName: string, is_public?: boolean): Promise<DirectoryResponseDTO>;
     getDirectories(filters?: DirectoryFilters): Promise<DirectoryResponseDTO[]>;
     deleteDirectory(id: number): Promise<void>;
-    uploadFiles(files: UploadFile[], options?: UploadOptions): Promise<FileResponseDTO[]>;
+    uploadFiles(files: UploadFile[], options: UploadOptions): Promise<FileResponseDTO[]>;
 }

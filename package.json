@@ -1,6 +1,6 @@
 {
 	"name": "nova_sdk",
-	"version": "0.0.2",
+	"version": "1.0.0",
 	"description": "Nova SDK for file uploads and directory management",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",

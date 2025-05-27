@@ -78,7 +78,7 @@ interface UploadFile {
 
 ```typescript
 interface UploadOptions {
-	namespace?: string; // Storage namespace
+	namespace: string; // Storage namespace (required)
 	preserve_name?: boolean; // Keep original filenames
 	tags?: string[]; // File tags
 	directory_name?: string; // Directory name for upload
@@ -135,8 +135,10 @@ const file = {
 	mimetype: 'image/png', // MIME type of the file
 };
 
-// Upload file
-const response = await nova.uploadFiles([file]);
+// Upload file with required namespace
+const response = await nova.uploadFiles([file], {
+	namespace: 'public', // Required: specify the storage namespace
+});
 ```
 
 ### Uploading with Options
@@ -158,9 +160,9 @@ const files = [
 ];
 
 const options = {
-	namespace: 'public', // Storage namespace
-	preserve_name: true, // Keep original filenames
-	tags: ['user_123', 'avatar'], // Tags for the files
+	namespace: 'public', // Required: Storage namespace
+	preserve_name: true, // Optional: Keep original filenames
+	tags: ['user_123', 'avatar'], // Optional: Tags for the files
 };
 
 const response = await nova.uploadFiles(files, options);
@@ -175,7 +177,7 @@ const directory = await nova.createDirectory('my-files', true); // true for publ
 // Use the directory name for uploads
 const response = await nova.uploadFiles(files, {
 	directory_name: directory.name,
-	namespace: 'public',
+	namespace: 'public', // Required: Storage namespace
 	preserve_name: true,
 });
 ```
@@ -195,7 +197,18 @@ try {
 }
 ```
 
-2. Invalid Directory Creation:
+2. Missing Namespace:
+
+```typescript
+try {
+	const response = await nova.uploadFiles(files); // Will throw if namespace is not provided
+} catch (error) {
+	console.error('Upload failed:', error.message);
+	// Error: Namespace is required in upload options
+}
+```
+
+3. Invalid Directory Creation:
 
 ```typescript
 try {
@@ -206,7 +219,7 @@ try {
 }
 ```
 
-3. Upload Failures:
+4. Upload Failures:
 
 ```typescript
 try {
@@ -217,7 +230,7 @@ try {
 }
 ```
 
-4. Directory Not Found:
+5. Directory Not Found:
 
 ```typescript
 try {
@@ -230,7 +243,7 @@ try {
 }
 ```
 
-5. File Validation Errors:
+6. File Validation Errors:
 
 ```typescript
 try {

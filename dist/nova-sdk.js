@@ -67,8 +67,14 @@ class NovaSDK {
         }
     }
     // File Upload Methods
-    async uploadFiles(files, options = {}) {
+    async uploadFiles(files, options) {
         var _a;
+        if (!files || !Array.isArray(files) || files.length === 0) {
+            throw new Error('Files array is required');
+        }
+        if (!options || !options.namespace) {
+            throw new Error('Namespace is required in upload options');
+        }
         const form = new form_data_1.default();
         // Add options to form data
         if (options.directory_name) {
