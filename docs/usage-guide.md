@@ -5,27 +5,26 @@ A comprehensive guide on how to use the File Upload SDK in your TypeScript/JavaS
 ## Installation
 
 ```bash
-npm install file-upload-sdk
-# or
-yarn add file-upload-sdk
+npm install git@github.com:MojdehBook/nova-sdk.git
 ```
 
 ## Configuration
 
-The SDK requires a base URL for the API. You can provide it in two ways:
+The SDK requires a base URL and a token for the API. You can provide it in two ways:
 
 1. During instantiation:
 
 ```typescript
 import { FileUploader } from 'file-upload-sdk';
 
-const uploader = new FileUploader('https://your-api-url');
+const uploader = new FileUploader('https://your-api-url', 'token');
 ```
 
 2. Through environment variable:
 
 ```bash
 FILEUPLOAD_URL=https://your-api-url
+FILEUPLOAD_TOKEN=t7812638
 ```
 
 ## Basic Usage
@@ -36,14 +35,14 @@ FILEUPLOAD_URL=https://your-api-url
 import { FileUploader } from 'file-upload-sdk';
 import { Buffer } from 'node:buffer';
 
-const uploader = new FileUploader('https://your-api-url');
+const uploader = new FileUploader('https://your-api-url'. 'token');
 
 // Prepare your file
 const file = {
-  fieldname: 'file', // The field name in the form data
-  originalname: 'example.png', // Original file name
-  buffer: Buffer.from('...'), // File buffer
-  mimetype: 'image/png', // MIME type of the file
+	fieldname: 'file', // The field name in the form data
+	originalname: 'example.png', // Original file name
+	buffer: Buffer.from('...'), // File buffer
+	mimetype: 'image/png', // MIME type of the file
 };
 
 // Upload file
@@ -54,25 +53,24 @@ const response = await uploader.uploadFiles([file]);
 
 ```typescript
 const files = [
-  {
-    fieldname: 'file',
-    originalname: 'logo.png',
-    buffer: Buffer.from('...'),
-    mimetype: 'image/png',
-  },
-  {
-    fieldname: 'avatar',
-    originalname: 'profile.jpg',
-    buffer: Buffer.from('...'),
-    mimetype: 'image/jpeg',
-  },
+	{
+		fieldname: 'file',
+		originalname: 'logo.png',
+		buffer: Buffer.from('...'),
+		mimetype: 'image/png',
+	},
+	{
+		fieldname: 'avatar',
+		originalname: 'profile.jpg',
+		buffer: Buffer.from('...'),
+		mimetype: 'image/jpeg',
+	},
 ];
 
 const options = {
-  namespace: 'public', // Storage namespace
-  preserve_name: true, // Keep original filenames
-  tags: ['user_123', 'avatar'], // Tags for the files
-  directoryId: '13', // Optional: Upload to specific directory
+	namespace: 'public', // Storage namespace
+	preserve_name: true, // Keep original filenames
+	tags: ['user_123', 'avatar'], // Tags for the files
 };
 
 const response = await uploader.uploadFiles(files, options);
@@ -86,9 +84,9 @@ const directoryId = await uploader.createDirectory('my-files');
 
 // Use the directory ID for uploads
 const response = await uploader.uploadFiles(files, {
-  directoryId,
-  namespace: 'public',
-  preserve_name: true,
+	directoryId,
+	namespace: 'public',
+	preserve_name: true,
 });
 ```
 
@@ -98,31 +96,31 @@ The SDK returns a typed response that matches the API's format:
 
 ```typescript
 interface ApiResponse<T> {
-  success: boolean;
-  message?: string;
-  data?: T;
-  error?: ApiError;
+	success: boolean;
+	message?: string;
+	data?: T;
+	error?: ApiError;
 }
 
 interface FileResponseDTO {
-  id: number;
-  app_id: number;
-  dir_id: number;
-  file_name: string;
-  original_name: string;
-  mime_type: string | null;
-  tags: string[] | null;
-  file_size: number;
-  url: string | null;
-  processed_files:
-    | {
-        variant: string;
-        file_name: string;
-        file_size: number;
-        url: string | null;
-      }[]
-    | null;
-  uploaded_at: Date;
+	id: number;
+	app_id: number;
+	dir_id: number;
+	file_name: string;
+	original_name: string;
+	mime_type: string | null;
+	tags: string[] | null;
+	file_size: number;
+	url: string | null;
+	processed_files:
+		| {
+				variant: string;
+				file_name: string;
+				file_size: number;
+				url: string | null;
+		  }[]
+		| null;
+	uploaded_at: Date;
 }
 ```
 
@@ -173,9 +171,9 @@ The SDK throws errors in the following cases:
 
 ```typescript
 try {
-  const uploader = new FileUploader(); // Will throw if FILEUPLOAD_URL is not set
+	const uploader = new FileUploader(); // Will throw if FILEUPLOAD_URL is not set
 } catch (error) {
-  console.error('Configuration error:', error.message);
+	console.error('Configuration error:', error.message);
 }
 ```
 
@@ -183,9 +181,9 @@ try {
 
 ```typescript
 try {
-  const response = await uploader.uploadFiles(files, options);
+	const response = await uploader.uploadFiles(files, options);
 } catch (error) {
-  console.error('Upload failed:', error.message);
+	console.error('Upload failed:', error.message);
 }
 ```
 
@@ -195,10 +193,10 @@ try {
 
 ```typescript
 interface UploadFile {
-  fieldname: string; // Form field name
-  originalname: string; // Original file name
-  buffer: Buffer; // File buffer
-  mimetype: string; // MIME type
+	fieldname: string; // Form field name
+	originalname: string; // Original file name
+	buffer: Buffer; // File buffer
+	mimetype: string; // MIME type
 }
 ```
 
@@ -206,10 +204,10 @@ interface UploadFile {
 
 ```typescript
 interface UploadOptions {
-  namespace?: string; // Storage namespace
-  preserve_name?: boolean; // Keep original filenames
-  tags?: string[]; // File tags
-  directoryId?: string; // Directory ID for upload
+	namespace?: string; // Storage namespace
+	preserve_name?: boolean; // Keep original filenames
+	tags?: string[]; // File tags
+	directoryId?: string; // Directory ID for upload
 }
 ```
 
@@ -233,24 +231,24 @@ interface UploadOptions {
 
 ```typescript
 const files = [
-  {
-    fieldname: 'profile_picture',
-    originalname: 'profile.jpg',
-    buffer: Buffer.from('...'),
-    mimetype: 'image/jpeg',
-  },
-  {
-    fieldname: 'document',
-    originalname: 'contract.pdf',
-    buffer: Buffer.from('...'),
-    mimetype: 'application/pdf',
-  },
+	{
+		fieldname: 'profile_picture',
+		originalname: 'profile.jpg',
+		buffer: Buffer.from('...'),
+		mimetype: 'image/jpeg',
+	},
+	{
+		fieldname: 'document',
+		originalname: 'contract.pdf',
+		buffer: Buffer.from('...'),
+		mimetype: 'application/pdf',
+	},
 ];
 
 const options = {
-  namespace: 'private',
-  preserve_name: true,
-  tags: ['user_456', 'documents'],
+	namespace: 'private',
+	preserve_name: true,
+	tags: ['user_456', 'documents'],
 };
 
 const response = await uploader.uploadFiles(files, options);
@@ -263,10 +261,10 @@ const response = await uploader.uploadFiles(files, options);
 
 // Access processed variants
 response.data.files.forEach((file) => {
-  if (file.processed_files) {
-    file.processed_files.forEach((variant) => {
-      console.log(`Variant ${variant.variant}: ${variant.url}`);
-    });
-  }
+	if (file.processed_files) {
+		file.processed_files.forEach((variant) => {
+			console.log(`Variant ${variant.variant}: ${variant.url}`);
+		});
+	}
 });
 ```

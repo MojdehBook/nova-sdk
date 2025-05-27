@@ -15,20 +15,20 @@ export interface ProcessedFile {
     variant: string;
     file_name: string;
     file_size: number;
-    url: string | null;
+    url: string;
 }
 export interface FileResponseDTO {
-    id: number;
+    id: string;
     app_id: number;
-    dir_id: number;
+    dir_id: string;
     file_name: string;
     original_name: string;
-    mime_type: string | null;
-    tags: string[] | null;
+    mime_type: string;
+    tags: string[];
     file_size: number;
-    url: string | null;
-    processed_files: ProcessedFile[] | null;
-    uploaded_at: Date;
+    url: string;
+    processed_files: ProcessedFile[];
+    uploaded_at: string;
 }
 export interface DirectoryResponseDTO {
     id: number;
@@ -36,5 +36,10 @@ export interface DirectoryResponseDTO {
     is_public: boolean;
     owner_id: number;
     files?: FileResponseDTO[];
-    files_count?: number;
+    files_count: string;
+}
+export interface DirectoryFilters {
+    id?: number;
+    name?: string;
+    is_public?: boolean;
 }
