@@ -35,7 +35,7 @@ export FILEUPLOAD_TOKEN="your-auth-token"
 2. Constructor parameters:
 
 ```typescript
-import NovaSDK from '@mojdeh/nova-sdk';
+import NovaSDK from 'nova_sdk';
 
 const nova = new NovaSDK('https://your-nova-instance.com', 'your-auth-token');
 ```
