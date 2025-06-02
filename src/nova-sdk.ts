@@ -17,7 +17,6 @@ export interface UploadFile {
 
 export interface UploadOptions {
 	namespace: string;
-	directory_name?: string;
 	preserve_name?: boolean;
 	tags?: string[];
 }
@@ -68,7 +67,7 @@ export default class NovaSDK {
 		});
 
 		if (!res.data.data?.directory) {
-			throw new Error('NovaSDK: Invalid response from /manager/directory');
+			throw new Error('NovaSDK: Invalid response from "createDirectory"');
 		}
 
 		return res.data.data.directory;
@@ -96,7 +95,7 @@ export default class NovaSDK {
 		>(`/manager/directory`, { params });
 
 		if (!res.data.data?.directories) {
-			throw new Error('NovaSDK: Invalid response from /manager/directory');
+			throw new Error('NovaSDK: Invalid response from "getDirectories"');
 		}
 
 		return res.data.data.directories;
@@ -134,16 +133,12 @@ export default class NovaSDK {
 		const form = new FormData();
 
 		// Add options to form data
-		if (options.directory_name) {
-			form.append('namespace', options.directory_name);
-		} else if (options.namespace) {
-			form.append('namespace', options.namespace);
-		}
-		if (options.preserve_name !== undefined) {
+		form.append('namespace', options.namespace);
+		if (options.preserve_name) {
 			form.append('preserve_name', options.preserve_name.toString());
 		}
 		if (options.tags && options.tags.length > 0) {
-			form.append('tags', options.tags.join(','));
+			form.append('tags', options.tags.map((tag) => tag.trim()).join(','));
 		}
 
 		// Add files to form data
@@ -161,7 +156,7 @@ export default class NovaSDK {
 		>(`/upload`, form, { headers });
 
 		if (!res.data.data?.files) {
-			throw new Error('NovaSDK: Invalid response from /upload');
+			throw new Error('NovaSDK: Invalid response from "uploadFiles"');
 		}
 
 		return res.data.data.files;

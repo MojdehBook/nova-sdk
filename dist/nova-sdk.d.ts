@@ -8,7 +8,6 @@ export interface UploadFile {
 }
 export interface UploadOptions {
     namespace: string;
-    directory_name?: string;
     preserve_name?: boolean;
     tags?: string[];
 }

@@ -33,7 +33,7 @@ class NovaSDK {
             is_public,
         });
         if (!((_a = res.data.data) === null || _a === void 0 ? void 0 : _a.directory)) {
-            throw new Error('NovaSDK: Invalid response from /manager/directory');
+            throw new Error('NovaSDK: Invalid response from "createDirectory"');
         }
         return res.data.data.directory;
     }
@@ -53,7 +53,7 @@ class NovaSDK {
         }
         const res = await this.api_caller.get(`/manager/directory`, { params });
         if (!((_a = res.data.data) === null || _a === void 0 ? void 0 : _a.directories)) {
-            throw new Error('NovaSDK: Invalid response from /manager/directory');
+            throw new Error('NovaSDK: Invalid response from "getDirectories"');
         }
         return res.data.data.directories;
     }
@@ -77,17 +77,12 @@ class NovaSDK {
         }
         const form = new form_data_1.default();
         // Add options to form data
-        if (options.directory_name) {
-            form.append('namespace', options.directory_name);
-        }
-        else if (options.namespace) {
-            form.append('namespace', options.namespace);
-        }
-        if (options.preserve_name !== undefined) {
+        form.append('namespace', options.namespace);
+        if (options.preserve_name) {
             form.append('preserve_name', options.preserve_name.toString());
         }
         if (options.tags && options.tags.length > 0) {
-            form.append('tags', options.tags.join(','));
+            form.append('tags', options.tags.map((tag) => tag.trim()).join(','));
         }
         // Add files to form data
         for (const file of files) {
@@ -99,7 +94,7 @@ class NovaSDK {
         const headers = form.getHeaders();
         const res = await this.api_caller.post(`/upload`, form, { headers });
         if (!((_a = res.data.data) === null || _a === void 0 ? void 0 : _a.files)) {
-            throw new Error('NovaSDK: Invalid response from /upload');
+            throw new Error('NovaSDK: Invalid response from "uploadFiles"');
         }
         return res.data.data.files;
     }
