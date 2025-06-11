@@ -1,3 +1,11 @@
-import NovaSDK from './nova-sdk';
-export { UploadFile, UploadOptions } from './nova-sdk';
+import * as Directory from './apis/manager/directories';
+//import * as File from './apis/manager/files';
+import * as Upload from './apis/upload';
+
+const NovaSDK = {
+	...Directory,
+	//...File,
+	...Upload,
+};
+
 export default NovaSDK;
