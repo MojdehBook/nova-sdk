@@ -1,4 +1,3 @@
-export * from './types';
 export * as NovaTypes from './types';
 import * as Directory from './apis/manager/directories';
 //import * as File from './apis/manager/files';
