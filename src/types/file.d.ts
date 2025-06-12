@@ -3,6 +3,7 @@ export interface ProcessedFile {
 	variant: string;
 	file_name: string;
 	file_size: number;
+	path: string;
 	url: string;
 }
 
@@ -15,6 +16,7 @@ export interface FileResponseDTO {
 	mime_type: string;
 	tags: string[];
 	file_size: number;
+	path: string;
 	url: string;
 	processed_files: ProcessedFile[];
 	uploaded_at: string;
