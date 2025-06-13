@@ -1,4 +1,4 @@
-import Axios, { AxiosResponse } from 'axios';
+import Axios, { AxiosResponse, HttpStatusCode } from 'axios';
 import { baseUrl, token } from './config';
 import { NovaError } from '../utils/errors';
 
@@ -16,10 +16,13 @@ apiClient.interceptors.response.use(
 		return response.data as unknown;
 	},
 	(error) => {
-		const statusCode = error.response.status;
+		const statusCode =
+			error?.response?.status ?? HttpStatusCode.ServiceUnavailable;
 		const message =
-			error.response.data.message ?? error.response.statusText ?? error.message;
-		const details = error.response.data.error ?? {};
+			error?.response?.data?.message ??
+			error?.response?.statusText ??
+			error.message;
+		const details = error?.response?.data?.error ?? {};
 		throw new NovaError(message, statusCode, details);
 	}
 );
