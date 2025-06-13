@@ -32,9 +32,13 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NovaTypes = void 0;
 exports.NovaTypes = __importStar(require("./types"));
+__exportStar(require("./utils/errors"), exports);
 const Directory = __importStar(require("./apis/manager/directories"));
 //import * as File from './apis/manager/files';
 const Upload = __importStar(require("./apis/upload"));
