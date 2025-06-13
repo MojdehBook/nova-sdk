@@ -1,5 +1,6 @@
 import { HttpStatusCode } from 'axios';
 import { NovaError } from '../utils/errors';
+import path from 'path';
 
 const Env = process.env;
 
@@ -16,5 +17,5 @@ if (!Env.NOVA_TOKEN)
 		{ fields: { NOVA_TOKEN: Env.NOVA_TOKEN } }
 	);
 
-export const baseUrl = process.env.NOVA_URL;
+export const baseUrl = path.join(Env.NOVA_URL, '/api');
 export const token = process.env.NOVA_TOKEN;
