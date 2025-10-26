@@ -40,11 +40,11 @@ exports.NovaTypes = void 0;
 exports.NovaTypes = __importStar(require("./types"));
 __exportStar(require("./utils/errors"), exports);
 const Directory = __importStar(require("./apis/manager/directories"));
-//import * as File from './apis/manager/files';
+const File = __importStar(require("./apis/manager/files"));
 const Upload = __importStar(require("./apis/upload"));
 const NovaSDK = {
     ...Directory,
-    //...File,
+    ...File,
     ...Upload,
 };
 exports.default = NovaSDK;

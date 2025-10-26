@@ -13,7 +13,7 @@ apiClient.interceptors.response.use(
 	(response: AxiosResponse): any => {
 		if (response.data?.success && response.data?.data)
 			return response.data.data as unknown;
-		return response.data as unknown;
+		return response;
 	},
 	(error) => {
 		const statusCode =

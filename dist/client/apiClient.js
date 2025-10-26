@@ -46,7 +46,7 @@ apiClient.interceptors.response.use((response) => {
     var _a, _b;
     if (((_a = response.data) === null || _a === void 0 ? void 0 : _a.success) && ((_b = response.data) === null || _b === void 0 ? void 0 : _b.data))
         return response.data.data;
-    return response.data;
+    return response;
 }, (error) => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
     const statusCode = (_b = (_a = error === null || error === void 0 ? void 0 : error.response) === null || _a === void 0 ? void 0 : _a.status) !== null && _b !== void 0 ? _b : axios_1.HttpStatusCode.ServiceUnavailable;

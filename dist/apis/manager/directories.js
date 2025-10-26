@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createDirectory = createDirectory;
+exports.getDirectories = getDirectories;
 const axios_1 = require("axios");
 const apiClient_1 = __importDefault(require("../../client/apiClient"));
 const errors_1 = require("../../utils/errors");

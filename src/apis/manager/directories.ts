@@ -1,10 +1,6 @@
 import { HttpStatusCode } from 'axios';
 import apiClient from '../../client/apiClient';
-import {
-	ApiResponse,
-	DirectoryFilters,
-	DirectoryResponseDTO,
-} from '../../types';
+import { DirectoryFilters, DirectoryResponseDTO } from '../../types';
 import { NovaError } from '../../utils/errors';
 
 // Directory Management Methods
@@ -29,7 +25,7 @@ export async function createDirectory(
 	return res.directory;
 }
 
-async function getDirectories(
+export async function getDirectories(
 	filters?: DirectoryFilters
 ): Promise<DirectoryResponseDTO[]> {
 	const params: Record<string, string> = {};
